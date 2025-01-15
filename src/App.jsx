@@ -15,7 +15,7 @@ function App() {
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/RegisterBasic" element={<RegisterBasic />} />
         <Route
-          path="/RegisterRegularJumpers"
+          path="/RegisterRegularJumper"
           element={<RegisterRegularJumper />}
         />
         <Route path="/RegisterChief" element={<RegisterChief />} />

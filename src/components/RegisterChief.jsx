@@ -22,145 +22,158 @@ const RegisterChief = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "20px",
-        backgroundColor: "#ccc",
-      }}
-    >
-      <h2>Chief Profile</h2>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "80%",
-        }}
-      >
-        <div>
-          <div
-            style={{
-              width: "150px",
-              height: "150px",
-              backgroundColor: "#eee",
-              marginBottom: "10px",
-            }}
-          >
-            User Image
-          </div>
+    <div className="flex items-center justify-center h-screen bg-gray-800">
+      <div className="w-full max-w-4xl bg-gray-200 p-8 rounded-lg shadow-md">
+        <h2 className="text-center text-lg font-semibold text-gray-700 mb-6">
+          Chief Profile
+        </h2>
+        <table className="w-full">
+          <tbody>
+            <tr>
+              <td className="p-4 align-top">
+                <div className="flex flex-col items-center">
+                  <div className="w-36 h-36 bg-gray-300 mb-4 rounded-full flex items-center justify-center text-gray-500">
+                    User Image
+                  </div>
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Upload Image
+                  </button>
+                </div>
+              </td>
+              <td className="p-4 align-top">
+                <div className="space-y-4">
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="name"
+                    >
+                      Name:
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="email"
+                    >
+                      Email:
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="contractDetail"
+                    >
+                      Contract Detail:
+                    </label>
+                    <input
+                      type="text"
+                      id="contractDetail"
+                      name="contractDetail"
+                      value={formData.contractDetail}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="gender"
+                    >
+                      Gender:
+                    </label>
+                    <input
+                      type="text"
+                      id="gender"
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="address"
+                    >
+                      Address:
+                    </label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                      htmlFor="medicalId"
+                    >
+                      Medical ID:
+                    </label>
+                    <input
+                      type="text"
+                      id="medicalId"
+                      name="medicalId"
+                      value={formData.medicalId}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="flex justify-end space-x-4 mt-6">
+          <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Edit
+          </button>
           <button
-            style={{
-              padding: "10px",
-              backgroundColor: "#4A2EBB",
-              color: "white",
-              border: "none",
-            }}
+            onClick={handleSubmit}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
           >
-            Upload Image
+            Update
           </button>
         </div>
-        <div style={{ flexGrow: 1, marginLeft: "20px" }}>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Contract Detail:</label>
-            <input
-              type="text"
-              name="contractDetail"
-              value={formData.contractDetail}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Gender:</label>
-            <input
-              type="text"
-              name="gender"
-              value={formData.gender}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Phone Number:</label>
-            <input
-              type="text"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Medical ID:</label>
-            <input
-              type="text"
-              name="medicalId"
-              value={formData.medicalId}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            <button
-              style={{
-                padding: "10px",
-                backgroundColor: "#4A2EBB",
-                color: "white",
-                border: "none",
-              }}
-            >
-              Edit
-            </button>
-            <button
-              style={{
-                padding: "10px",
-                backgroundColor: "#4A2EBB",
-                color: "white",
-                border: "none",
-              }}
-              onClick={handleSubmit}
-            >
-              Update
-            </button>
-          </div>
-        </div>
+        <button className="w-full mt-6 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+          Schedule your team (chief nurse)
+        </button>
       </div>
-      <button
-        style={{
-          padding: "10px",
-          backgroundColor: "#28A745",
-          color: "white",
-          border: "none",
-          marginTop: "20px",
-        }}
-      >
-        Schedule your team (chief nurse)
-      </button>
     </div>
   );
 };

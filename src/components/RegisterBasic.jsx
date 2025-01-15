@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterBasic = () => {
+  const [userType, setUserType] = useState(""); // State to track user type
+  const navigate = useNavigate(); // React Router's navigate function
+
+  const handleRegister = (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    // Navigate to the appropriate page based on the selected user type
+    if (userType === "Regular" || userType === "Jumper") {
+      navigate("/RegisterRegularJumper");
+    } else if (userType === "Chief") {
+      navigate("/RegisterChief");
+    } else {
+      alert("Please select a valid user type.");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-800">
       <div className="w-full max-w-md bg-gray-200 p-8 rounded-lg shadow-md">
         <h2 className="text-center text-lg font-semibold text-gray-700 mb-6">
           REGISTER AS A NEW USER
         </h2>
-        <form>
+        <form onSubmit={handleRegister}>
           {/* User Type */}
           <div className="mb-4">
             <label
@@ -16,12 +33,19 @@ const RegisterBasic = () => {
             >
               USER TYPE
             </label>
-            <input
-              type="text"
+            <select
               id="user-type"
-              placeholder="USER / Chief / Jumper"
+              value={userType}
+              onChange={(e) => setUserType(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
+            >
+              <option value="" disabled>
+                Select user type
+              </option>
+              <option value="Regular">Regular</option>
+              <option value="Chief">Chief</option>
+              <option value="Jumper">Jumper</option>
+            </select>
           </div>
 
           {/* Name */}
