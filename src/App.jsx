@@ -1,3 +1,6 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MenuProfile from "./pages/MenuProfile";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -7,11 +10,22 @@ import RegisterRegularJumper from "./components/RegisterRegularJumper";
 import RegisterChief from "./components/RegisterChief";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+  
+  const App = () => {
+  const userData = {
+    avatar: "https://via.placeholder.com/50",
+    name: "Adriana",
+    institution: "Health Care Institute",
+    department: "Cardiology",
+  };
 
-function App() {
   return (
     <Router>
       <Routes>
+        <Route
+          path="/menu-profile"
+          element={<MenuProfile userType="Chief" userData={userData} />}
+        />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/RegisterBasic" element={<RegisterBasic />} />
         <Route
@@ -22,6 +36,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
