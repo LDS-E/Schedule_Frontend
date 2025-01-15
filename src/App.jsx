@@ -1,3 +1,6 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WelcomePage from "./components/WelcomePage";
+import CreateAccountPage from "./components/CreateAccountPage";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MenuProfile from "./pages/MenuProfile";
@@ -22,6 +25,8 @@ import "./App.css";
   return (
     <Router>
       <Routes>
+    <Route path="/" element={<WelcomePage />} />
+        <Route path="/create-account" element={<CreateAccountPage />} />
         <Route
           path="/menu-profile"
           element={<MenuProfile userType="Chief" userData={userData} />}
@@ -37,5 +42,6 @@ import "./App.css";
     </Router>
   );
 };
+
 
 export default App;
