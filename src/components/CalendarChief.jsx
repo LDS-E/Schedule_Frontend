@@ -20,7 +20,6 @@ const CalendarChief = ({ shifts }) => {
           </div>
         ))}
 
-        {/* Empty Cells for Alignment */}
         {Array.from({ length: startDayOfMonth - 1 }).map((_, idx) => (
           <div key={`empty-${idx}`} className="border p-2 bg-gray-50"></div>
         ))}
