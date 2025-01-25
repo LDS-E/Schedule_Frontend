@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WelcomePage from "./components/WelcomePage";
+import CreateAccountPage from "./components/CreateAccountPage";
+import MenuProfile from "./pages/MenuProfile";
 import LogIn from "./components/LogIn";
 import RegisterBasic from "./components/RegisterBasic";
 import RegisterRegularJumper from "./components/RegisterRegularJumper";
@@ -7,7 +11,6 @@ import CalendarChief from "./components/CalendarChief";
 import ShiftForm from "./components/ShiftForm";
 import NurseList from "./components/NurseList";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// Add this for navigation
 import "./App.css";
 
 function App() {
@@ -23,18 +26,28 @@ function App() {
       ...prevShifts,
       [day]: [...(prevShifts[day] || []), shiftData],
     }));
+    
+import PrivateRoute from "./components/PrivateRoute"; // Importando a Rota Protegida
+import "./App.css";
+
+const App = () => {
+  const userData = {
+    avatar: "https://via.placeholder.com/50",
+    name: "Adriana",
+    institution: "Health Care Institute",
+    department: "Cardiology",
   };
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogIn />} /> {/* Default route */}
-        <Route path="/LogIn" element={<LogIn />} />
+    <Route path="/" element={<WelcomePage />} />
+        <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route path="/LogIn" element={<LogIn />} />
         <Route path="/RegisterBasic" element={<RegisterBasic />} />
         <Route
           path="/RegisterRegularJumper"
-          element={<RegisterRegularJumper />}
-        />
+          element={<RegisterRegularJumper />} />
         <Route path="/RegisterChief" element={<RegisterChief />} />
         <Route
           path="/CalendarChief"
@@ -45,9 +58,19 @@ function App() {
           element={<ShiftForm nurses={nurses} onAddShift={handleAddShift} />}
         />
         <Route path="/NurseList" element={<NurseList nurses={nurses} />} />
+
+        {/* Rota protegida */}
+        <Route
+          path="/menu-profile"
+          element={
+            <PrivateRoute>
+              <MenuProfile userType="Chief" userData={userData} />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
