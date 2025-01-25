@@ -41,20 +41,13 @@ const CreateAccountPage = () => {
           </div>
         ))}
 
-        {/* Botões aparecem após a última mensagem */}
         {step === messages.length && (
           <div className="flex flex-col gap-4 mt-6">
             <button
-              className="bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600"
-              onClick={() => navigate("/RegisterRegularJumper")}
+              className="bg-cyan-500 text-white py-2 rounded-lg shadow-md hover:bg-yellow-600"
+              onClick={() => navigate("/RegisterBasic")}
             >
-              Regular/Jumper Nurse
-            </button>
-            <button
-              className="bg-yellow-500 text-white py-2 rounded-lg shadow-md hover:bg-yellow-600"
-              onClick={() => navigate("/RegisterChief")}
-            >
-              Chief Nurse
+              Create new account
             </button>
           </div>
         )}
