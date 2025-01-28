@@ -1,18 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (email === "user@example.com" && password === "1234") {
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/menu-profile");
-    } else {
-      alert("Invalid email or password");
-    }
+  const handleSubmit = () => {
+    // Chama a função handleLogin que está sendo passada como prop
+    handleLogin(email, password);
+    navigate("/menu-profile");
   };
 
   return (
@@ -54,12 +49,11 @@ const LogIn = () => {
 
         <button
           className="w-full bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600"
-          onClick={handleLogin}
+          onClick={handleSubmit}
         >
           Login
         </button>
 
-        {/* Botão de Voltar para a Home */}
         <button
           className="w-full mt-4 bg-gray-500 text-white py-2 rounded-lg shadow-md hover:bg-gray-600"
           onClick={() => navigate("/")}
