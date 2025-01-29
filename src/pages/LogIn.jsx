@@ -11,53 +11,49 @@ const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-300">
-      <div className="w-80 bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold text-center mb-4">Log In</h2>
+    <div className="flex items-center justify-center h-screen bg-base-200">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-3xl font-semibold text-center mb-6">Log In</h2>
 
-        <label
-          className="block text-sm font-medium text-gray-700 mb-2"
-          htmlFor="email"
-        >
-          EMAIL
-        </label>
-        <input
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {/* Campo de Email */}
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            className="input input-bordered w-full"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <label
-          className="block text-sm font-medium text-gray-700 mb-2"
-          htmlFor="password"
-        >
-          PASSWORD
-        </label>
-        <input
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* Campo de Senha */}
+        <div className="form-control mb-6">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input
+            className="input input-bordered w-full"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-        <button
-          className="w-full bg-blue-500 text-white py-2 rounded-lg shadow-md hover:bg-blue-600"
-          onClick={handleSubmit}
-        >
+        {/* Botão de Login */}
+        <button className="btn btn-primary w-full mb-4" onClick={handleSubmit}>
           Login
         </button>
 
-        <button
-          className="w-full mt-4 bg-gray-500 text-white py-2 rounded-lg shadow-md hover:bg-gray-600"
-          onClick={() => navigate("/")}
-        >
+        {/* Botão de Voltar */}
+        <button className="btn btn-ghost w-full" onClick={() => navigate("/")}>
           Back to Home
         </button>
       </div>
