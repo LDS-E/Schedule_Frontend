@@ -1,77 +1,93 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WelcomePage from "./components/WelcomePage";
-import CreateAccountPage from "./components/CreateAccountPage";
+import WelcomePage from "./pages/WelcomePage";
+import CreateAccountPage from "./pages/CreateAccountPage";
 import MenuProfile from "./pages/MenuProfile";
-import LogIn from "./components/LogIn";
-import RegisterBasic from "./components/RegisterBasic";
-import RegisterRegularJumper from "./components/RegisterRegularJumper";
-import RegisterChief from "./components/RegisterChief";
+import LogIn from "./pages/LogIn";
+import RegisterBasic from "./pages/RegisterBasic";
+import RegisterRegularJumper from "./pages/RegisterRegularJumper";
+import RegisterChief from "./pages/RegisterChief";
 import CalendarChief from "./components/CalendarChief";
 import ShiftForm from "./components/ShiftForm";
-import NurseList from "./components/NurseList";
-import PrivateRoute from "./components/PrivateRoute"; // Importação corrigida
+import PageShiftApproval from "./pages/PageShiftApproval";
+import MainHeader from "./components/MainHeader"; // Novo Header
+import Footer from "./components/Footer"; // Novo Footer
+import usersData from "./data/users.json";
+
 import "./App.css";
 
 const App = () => {
-  const [shifts, setShifts] = useState({});
-  const [nurses, setNurses] = useState([
-    { id: 1, name: "Alice", nurseType: "RN" },
-    { id: 2, name: "Bob", nurseType: "LPN" },
-  ]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Função corrigida para adicionar turnos ao calendário
-  const handleAddShift = (date, shiftData) => {
-    const day = parseInt(date.split("-")[2]);
-    setShifts((prevShifts) => ({
-      ...prevShifts,
-      [day]: [...(prevShifts[day] || []), shiftData],
-    }));
+  const handleLogin = (email, password) => {
+    const loggedUser = usersData.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (loggedUser) {
+      setIsAuthenticated(true);
+      setCurrentUser(loggedUser);
+      localStorage.setItem("isAuthenticated", "true");
+    } else {
+      alert("Invalid email or password!");
+    }
   };
 
-  // Dados do usuário (simulação)
-  const userData = {
-    avatar: "https://via.placeholder.com/50",
-    name: "Adriana",
-    institution: "Health Care Institute",
-    department: "Cardiology",
-  };
+  useEffect(() => {
+    const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
+    if (storedIsAuthenticated === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   return (
     <Router>
-      <Routes>
-        {/* Rotas Públicas */}
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/create-account" element={<CreateAccountPage />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/RegisterBasic" element={<RegisterBasic />} />
-        <Route
-          path="/RegisterRegularJumper"
-          element={<RegisterRegularJumper />}
-        />
-        <Route path="/RegisterChief" element={<RegisterChief />} />
-
-        {/* Rotas para o gerenciamento dos turnos */}
-        <Route
-          path="/CalendarChief"
-          element={<CalendarChief shifts={shifts} />}
-        />
-        <Route
-          path="/ShiftForm"
-          element={<ShiftForm nurses={nurses} onAddShift={handleAddShift} />}
-        />
-        <Route path="/NurseList" element={<NurseList nurses={nurses} />} />
-
-        {/* Rota protegida para o perfil do usuário */}
-        <Route
-          path="/menu-profile"
-          element={
-            <PrivateRoute>
-              <MenuProfile userType="Chief" userData={userData} />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <MainHeader /> {/* Header visível em todas as páginas */}
+      <div className="main-content">
+        {" "}
+        {/* Wrapper para manter o conteúdo alinhado */}
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route
+            path="/login"
+            element={
+              <LogIn
+                email={email}
+                password={password}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                handleLogin={handleLogin}
+              />
+            }
+          />
+          <Route path="/RegisterBasic" element={<RegisterBasic />} />
+          <Route
+            path="/RegisterRegularJumper"
+            element={<RegisterRegularJumper />}
+          />
+          <Route path="/RegisterChief" element={<RegisterChief />} />
+          <Route path="/CalendarChief" element={<CalendarChief />} />
+          <Route path="/ShiftForm" element={<ShiftForm />} />
+          <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
+          <Route
+            path="/menu-profile"
+            element={
+              isAuthenticated ? (
+                <MenuProfile
+                  userType={currentUser?.nurseType}
+                  userData={currentUser}
+                />
+              ) : (
+                <div>Please log in first.</div>
+              )
+            }
+          />
+        </Routes>
+      </div>
+      <Footer /> {/* Footer visível em todas as páginas */}
     </Router>
   );
 };
