@@ -9,7 +9,6 @@ import RegisterRegularJumper from "./pages/RegisterRegularJumper";
 import RegisterChief from "./pages/RegisterChief";
 import CalendarChief from "./components/CalendarChief";
 import ShiftForm from "./components/ShiftForm";
-import NurseList from "./components/NurseList";
 import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader"; // Novo Header
 import Footer from "./components/Footer"; // Novo Footer
@@ -72,7 +71,6 @@ const App = () => {
           <Route path="/RegisterChief" element={<RegisterChief />} />
           <Route path="/CalendarChief" element={<CalendarChief />} />
           <Route path="/ShiftForm" element={<ShiftForm />} />
-          <Route path="/NurseList" element={<NurseList />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
           <Route
             path="/menu-profile"
