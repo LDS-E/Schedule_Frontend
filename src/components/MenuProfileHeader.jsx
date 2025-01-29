@@ -10,7 +10,6 @@ const MenuProfileHeader = ({ userData }) => {
 
   return (
     <div className="flex justify-between items-center bg-blue-500 text-white py-4 px-6 shadow-md">
-      {/* Avatar e Informações */}
       <div className="flex items-center">
         <img
           src={userData.avatar}
@@ -23,7 +22,6 @@ const MenuProfileHeader = ({ userData }) => {
         </div>
       </div>
 
-      {/* Logout Button */}
       <button
         className="bg-red-500 px-3 py-1 rounded-md text-white hover:bg-red-600"
         onClick={handleLogout}

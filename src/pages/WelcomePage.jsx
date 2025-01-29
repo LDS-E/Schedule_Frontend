@@ -5,12 +5,10 @@ import { NavLink, Link } from "react-router-dom";
 const WelcomePage = () => {
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
-      {/* Logo */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold">Nurse Scheduling</h1>
       </div>
 
-      {/* Botões */}
       <div className="flex flex-col items-center space-y-4">
         <Link to="/create-account">
           <button className="btn btn-secondary w-full mb-4">

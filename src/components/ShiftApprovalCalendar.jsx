@@ -3,7 +3,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-// Dados de exemplo simulados
 const initialShifts = [
   {
     id: 1,
@@ -29,24 +28,22 @@ const initialShifts = [
 ];
 
 const ShiftApprovalCalendar = ({ userId }) => {
-  const [shifts, setShifts] = useState(initialShifts); // Dados iniciais para testes
+  const [shifts, setShifts] = useState(initialShifts);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
-  // Função para manipular a edição de um turno
   const handleEventClick = (clickInfo) => {
     setSelectedEvent(clickInfo.event);
     setNewTitle(clickInfo.event.title);
     setModalVisible(true);
   };
 
-  // Função para editar o título do evento
   const handleSave = () => {
     selectedEvent.setProp("title", newTitle);
     setModalVisible(false);
     alert("Shift updated!");
-    // Atualiza o status do turno para "pending_edit" quando o colaborador edita
+
     setShifts((prevShifts) =>
       prevShifts.map((shift) =>
         shift.id === selectedEvent.id
@@ -56,7 +53,6 @@ const ShiftApprovalCalendar = ({ userId }) => {
     );
   };
 
-  // Função para aprovar todas as edições pendentes
   const handleApproveAll = () => {
     setShifts((prevShifts) =>
       prevShifts.map((shift) =>
@@ -72,7 +68,6 @@ const ShiftApprovalCalendar = ({ userId }) => {
     <div className="p-4">
       <h2 className="text-2xl font-bold text-center mb-4">Shift Approval</h2>
 
-      {/* Se o usuário for chefe, mostra o botão de aprovar todos */}
       {userId === 1 && (
         <div className="mb-4 text-center">
           <button
@@ -93,7 +88,6 @@ const ShiftApprovalCalendar = ({ userId }) => {
         eventClick={handleEventClick}
       />
 
-      {/* Modal de Edição */}
       {modalVisible && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"

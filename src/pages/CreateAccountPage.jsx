@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const CreateAccountPage = () => {
   const [step, setStep] = useState(0);
-  const [showButtons, setShowButtons] = useState(false); // Para mostrar botões após delay
+  const [showButtons, setShowButtons] = useState(false); // btn delay
   const navigate = useNavigate();
 
-  // Mensagens da aplicação
   const messages = [
     "Hello! :)",
     "Amazing to see you here!",
@@ -14,7 +13,6 @@ const CreateAccountPage = () => {
     "To begin with, click on 'Create New Account'?",
   ];
 
-  // Exibir mensagens automaticamente
   useEffect(() => {
     if (step < messages.length) {
       const timer = setTimeout(() => {
@@ -22,7 +20,7 @@ const CreateAccountPage = () => {
       }, 700);
       return () => clearTimeout(timer);
     } else {
-      // Delay para mostrar os botões depois da última mensagem
+      // Delay for btns
       const buttonTimer = setTimeout(() => {
         setShowButtons(true);
       }, 500);
@@ -32,7 +30,6 @@ const CreateAccountPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-6">
-      {/* Chat Box (usando o estilo do DaisyUI) */}
       <div className="chat-container flex flex-col gap-4 w-full max-w-md p-4 overflow-hidden min-h-[200px]">
         {messages.slice(0, step).map((msg, index) => (
           <div key={index} className="chat chat-start">

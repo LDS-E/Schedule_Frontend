@@ -8,7 +8,6 @@ const MainHeader = () => {
   return (
     <header className="navbar bg-blue-600 text-white fixed w-full top-0 shadow-md z-50">
       <div className="navbar-start">
-        {/* Dropdown para o menu */}
         <div className="dropdown">
           <div
             tabIndex={0}
