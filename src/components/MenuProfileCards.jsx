@@ -8,23 +8,16 @@ const MenuProfileCards = ({ userType }) => {
   const cards =
     userType === "Chief"
       ? [
-          { title: "Weekly Shift", color: "bg-blue-400" },
-          { title: "Team Shifts", color: "bg-blue-600" },
+          { title: "Team Shifts", color: "bg-blue-600" }, // forget now
+          { title: "Team Schedule", color: "bg-blue-500" }, // navigate to calendarchief
           { title: "Your Team", color: "bg-blue-400" },
-          { title: "Request Time Off", color: "bg-green-600" },
-          { title: "Vacation Track", color: "bg-green-600" },
-          { title: "Sick Time Track", color: "bg-red-400" },
         ]
       : [
           {
             title: "My Shifts",
             color: "bg-blue-400",
             route: "/ShiftApprovalPage",
-          }, // Redireciona para a página de aprovação de turnos
-          { title: "Weekly Shift", color: "bg-blue-400" },
-          { title: "Monthly Shift", color: "bg-blue-600" },
-          { title: "Request Time Off", color: "bg-green-600" },
-          { title: "Request Vacation", color: "bg-green-600" },
+          },
         ];
 
   // Função que vai navegar para a página de aprovação de turnos

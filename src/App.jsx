@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WelcomePage from "./components/WelcomePage";
-import CreateAccountPage from "./components/CreateAccountPage";
+import WelcomePage from "./pages/WelcomePage";
+import CreateAccountPage from "./pages/CreateAccountPage";
 import MenuProfile from "./pages/MenuProfile";
-import LogIn from "./components/LogIn";
-import RegisterBasic from "./components/RegisterBasic";
-import RegisterRegularJumper from "./components/RegisterRegularJumper";
-import RegisterChief from "./components/RegisterChief";
+import LogIn from "./pages/LogIn";
+import RegisterBasic from "./pages/RegisterBasic";
+import RegisterRegularJumper from "./pages/RegisterRegularJumper";
+import RegisterChief from "./pages/RegisterChief";
 import CalendarChief from "./components/CalendarChief";
 import ShiftForm from "./components/ShiftForm";
 import NurseList from "./components/NurseList";
 import PageShiftApproval from "./pages/PageShiftApproval";
+import MainHeader from "./components/MainHeader"; // Novo Header
+import Footer from "./components/Footer"; // Novo Footer
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -37,52 +39,57 @@ const App = () => {
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
     if (storedIsAuthenticated === "true") {
-      // Já está autenticado, então não precisamos fazer nada
       setIsAuthenticated(true);
     }
   }, []);
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/create-account" element={<CreateAccountPage />} />
-        <Route
-          path="/login"
-          element={
-            <LogIn
-              email={email}
-              password={password}
-              setEmail={setEmail}
-              setPassword={setPassword}
-              handleLogin={handleLogin}
-            />
-          }
-        />
-        <Route path="/RegisterBasic" element={<RegisterBasic />} />
-        <Route
-          path="/RegisterRegularJumper"
-          element={<RegisterRegularJumper />}
-        />
-        <Route path="/RegisterChief" element={<RegisterChief />} />
-        <Route path="/CalendarChief" element={<CalendarChief />} />
-        <Route path="/ShiftForm" element={<ShiftForm />} />
-        <Route path="/NurseList" element={<NurseList />} />
-        <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
-        <Route
-          path="/menu-profile"
-          element={
-            isAuthenticated ? (
-              <MenuProfile
-                userType={currentUser?.nurseType}
-                userData={currentUser}
+      <MainHeader /> {/* Header visível em todas as páginas */}
+      <div className="main-content">
+        {" "}
+        {/* Wrapper para manter o conteúdo alinhado */}
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route
+            path="/login"
+            element={
+              <LogIn
+                email={email}
+                password={password}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                handleLogin={handleLogin}
               />
-            ) : (
-              <div>Please log in first.</div>
-            )
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route path="/RegisterBasic" element={<RegisterBasic />} />
+          <Route
+            path="/RegisterRegularJumper"
+            element={<RegisterRegularJumper />}
+          />
+          <Route path="/RegisterChief" element={<RegisterChief />} />
+          <Route path="/CalendarChief" element={<CalendarChief />} />
+          <Route path="/ShiftForm" element={<ShiftForm />} />
+          <Route path="/NurseList" element={<NurseList />} />
+          <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
+          <Route
+            path="/menu-profile"
+            element={
+              isAuthenticated ? (
+                <MenuProfile
+                  userType={currentUser?.nurseType}
+                  userData={currentUser}
+                />
+              ) : (
+                <div>Please log in first.</div>
+              )
+            }
+          />
+        </Routes>
+      </div>
+      <Footer /> {/* Footer visível em todas as páginas */}
     </Router>
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import MenuProfileHeader from "../components/MenuProfileHeader";
 import MenuProfileCards from "../components/MenuProfileCards";
-import MenuProfileFooter from "../components/MenuProfileFooter";
 
 const MenuProfile = ({ userType, userData }) => {
   return (
@@ -13,9 +12,6 @@ const MenuProfile = ({ userType, userData }) => {
       <div className="flex-grow content-center">
         <MenuProfileCards userType={userType} />
       </div>
-
-      {/* Footer */}
-      <MenuProfileFooter />
     </div>
   );
 };
