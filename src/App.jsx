@@ -7,11 +7,10 @@ import LogIn from "./pages/LogIn";
 import RegisterBasic from "./pages/RegisterBasic";
 import RegisterRegularJumper from "./pages/RegisterRegularJumper";
 import RegisterChief from "./pages/RegisterChief";
-import CalendarChief from "./components/CalendarChief";
-import ShiftForm from "./components/ShiftForm";
 import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader"; // Novo Header
 import Footer from "./components/Footer"; // Novo Footer
+import ShiftScheduler from "./components/ShiftScheduler";
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -69,8 +68,7 @@ const App = () => {
             element={<RegisterRegularJumper />}
           />
           <Route path="/RegisterChief" element={<RegisterChief />} />
-          <Route path="/CalendarChief" element={<CalendarChief />} />
-          <Route path="/ShiftForm" element={<ShiftForm />} />
+          <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
           <Route
             path="/menu-profile"
