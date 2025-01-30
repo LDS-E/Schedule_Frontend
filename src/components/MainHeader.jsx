@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 
-const MainHeader = () => {
+const MainHeader = ({ user, toggleTheme, isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="navbar bg-blue-600 text-white fixed w-full top-0 shadow-md z-50">
+      {/* Menu Dropdown na esquerda */}
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -15,7 +16,7 @@ const MainHeader = () => {
             className="btn btn-ghost btn-circle"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <Menu size={24} />
+            <Menu size={26} />
           </div>
           <ul
             tabIndex={0}
@@ -24,7 +25,7 @@ const MainHeader = () => {
             }`}
           >
             <li>
-              <Link to="/" className="btn btn-ghost btn-circle">
+              <Link to="/" className="btn btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -42,7 +43,9 @@ const MainHeader = () => {
               </Link>
             </li>
             <li>
-              <Link to="/profile" className="btn btn-ghost btn-circle">
+              <button className="btn btn-ghost">
+                {" "}
+                {/* change this btn fo a link */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -54,29 +57,28 @@ const MainHeader = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                   />
                 </svg>
-              </Link>
+              </button>
             </li>
             <li>
-              <Link to="/shifts" className="btn btn-ghost btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19.428 15.338a7.975 7.975 0 001.268-3.295 7.98 7.98 0 00-1.268-3.295l1.42-1.42a1 1 0 00.148-1.115l-2-3.464a1 1 0 00-1.115-.49l-2.49 1a7.943 7.943 0 00-2.008-.667V2.5a1 1 0 00-1-1h-4a1 1 0 00-1 1v2.504a7.943 7.943 0 00-2.008.667l-2.49-1a1 1 0 00-1.115.49l-2 3.464a1 1 0 00.148 1.115l1.42 1.42a7.975 7.975 0 00-1.268 3.295 7.98 7.98 0 001.268 3.295l-1.42 1.42a1 1 0 00-.148 1.115l2 3.464a1 1 0 001.115.49l2.49-1a7.943 7.943 0 002.008.667V21.5a1 1 0 001 1h4a1 1 0 001-1v-2.504a7.943 7.943 0 002.008-.667l2.49 1a1 1 0 001.115-.49l2-3.464a1 1 0 00-.148-1.115l-1.42-1.42a7.975 7.975 0 000-3.295zM12 15a3 3 0 110-6 3 3 0 010 6z"
-                  />
-                </svg>
-              </Link>
+              <button onClick={toggleTheme} className="btn btn-ghost">
+                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
             </li>
+            {user && (
+              <>
+                <li>
+                  <Link to="/settings" className="btn btn-ghost">
+                    Account Settings
+                  </Link>
+                </li>
+                <li>
+                  <button className="btn btn-ghost">Logout</button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
@@ -88,22 +90,7 @@ const MainHeader = () => {
       </div>
 
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
+        {/* older */}
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
@@ -123,6 +110,35 @@ const MainHeader = () => {
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
         </button>
+
+        {/* Avatar/Login */}
+        {user ? (
+          <div className="flex items-center gap-2">
+            <span className="text-sm">Hello, {user.name}</span>
+            <img
+              src={user.avatar}
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full border border-white"
+            />
+          </div>
+        ) : (
+          <Link to="/login" className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M16 21v-2a4 4 0 00-8 0v2m8-10a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          </Link>
+        )}
       </div>
     </header>
   );

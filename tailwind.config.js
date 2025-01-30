@@ -1,9 +1,12 @@
 import daisyui from "daisyui";
 
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"], // Certifique-se de que está incluindo todos os arquivos JSX
   theme: {
-    extend: {},
+    extend: {
+      // Aqui você pode adicionar outras personalizações, se necessário
+    },
   },
-  plugins: [daisyui], // add o DaisyUI as plugin
+  darkMode: "class", // Garante que o Tailwind usará a classe "dark" no body para ativar o modo escuro
+  plugins: [daisyui],
 };

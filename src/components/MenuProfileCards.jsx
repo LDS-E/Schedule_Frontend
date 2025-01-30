@@ -26,14 +26,15 @@ const MenuProfileCards = ({ userType }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-10 p-4">
+    <div className="flex flex-wrap justify-center gap-6 p-4">
       {cards.map((card, index) => (
-        <div key={index}>
-          <div
-            onClick={() => handleCardClick(card.route)}
-            className={`p-4 text-center text-white font-bold rounded-lg shadow-md ${card.color}`}
-          >
-            {card.title}
+        <div
+          key={index}
+          onClick={() => handleCardClick(card.route)}
+          className="card w-72 bg-base-100 shadow-xl cursor-pointer hover:scale-105 transition-transform duration-300"
+        >
+          <div className={`card-body ${card.color} text-white rounded-xl`}>
+            <h2 className="card-title">{card.title}</h2>
           </div>
         </div>
       ))}
