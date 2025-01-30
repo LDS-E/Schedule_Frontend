@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Alice",
+    "avatar": "https://via.placeholder.com/50",
+    "nurseType": "RN",
+    "institution": "Health Care Institute",
+    "department": "Cardiology",
+    "email": "alice@healthcare.com",
+    "password": "alice123"
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "avatar": "https://via.placeholder.com/50",
+    "nurseType": "LPN",
+    "institution": "Health Care Institute",
+    "department": "Cardiology",
+    "email": "bob@healthcare.com",
+    "password": "bob123"
+  },
+  {
+    "id": 3,
+    "name": "Adriana",
+    "avatar": "https://via.placeholder.com/50",
+    "nurseType": "Chief",
+    "institution": "Health Care Institute",
+    "department": "Cardiology",
+    "email": "adriana@healthcare.com",
+    "password": "adriana123"
+  }
+]
