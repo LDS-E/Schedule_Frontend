@@ -1,15 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importando o useNavigate
+import { useNavigate } from "react-router-dom";
 
 const MenuProfileCards = ({ userType }) => {
-  const navigate = useNavigate(); // Hook para navegação programática
+  const navigate = useNavigate();
 
-  // Define os cards com base no tipo de usuário
   const cards =
     userType === "Chief"
       ? [
-          { title: "Team Shifts", color: "bg-blue-600" }, // forget now
-          { title: "Team Schedule", color: "bg-blue-500" }, // navigate to calendarchief
+          { title: "Team Shifts", color: "bg-blue-600" },
+          { title: "Team Schedule", color: "bg-blue-500" },
           { title: "Your Team", color: "bg-blue-400" },
         ]
       : [
@@ -20,22 +19,22 @@ const MenuProfileCards = ({ userType }) => {
           },
         ];
 
-  // Função que vai navegar para a página de aprovação de turnos
   const handleCardClick = (route) => {
     if (route) {
-      navigate(route); // Navega para a rota desejada (no caso, "/shift-approval")
+      navigate(route);
     }
   };
 
   return (
-    <div className="grid grid-cols-2 gap-10 p-4">
+    <div className="flex flex-wrap justify-center gap-6 p-4">
       {cards.map((card, index) => (
-        <div key={index}>
-          <div
-            onClick={() => handleCardClick(card.route)} // Chama a função handleCardClick ao clicar no card
-            className={`p-4 text-center text-white font-bold rounded-lg shadow-md ${card.color}`}
-          >
-            {card.title}
+        <div
+          key={index}
+          onClick={() => handleCardClick(card.route)}
+          className="card w-72 bg-base-100 shadow-xl cursor-pointer hover:scale-105 transition-transform duration-300"
+        >
+          <div className={`card-body ${card.color} text-white rounded-xl`}>
+            <h2 className="card-title">{card.title}</h2>
           </div>
         </div>
       ))}

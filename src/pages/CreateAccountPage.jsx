@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const CreateAccountPage = () => {
   const [step, setStep] = useState(0);
-  const [showButtons, setShowButtons] = useState(false); // Para mostrar botões após delay
+  const [showButtons, setShowButtons] = useState(false); // btn delay
   const navigate = useNavigate();
 
-  // Mensagens da aplicação
   const messages = [
     "Hello! :)",
     "Amazing to see you here!",
@@ -14,7 +13,6 @@ const CreateAccountPage = () => {
     "To begin with, click on 'Create New Account'?",
   ];
 
-  // Exibir mensagens automaticamente
   useEffect(() => {
     if (step < messages.length) {
       const timer = setTimeout(() => {
@@ -22,7 +20,7 @@ const CreateAccountPage = () => {
       }, 700);
       return () => clearTimeout(timer);
     } else {
-      // Delay para mostrar os botões depois da última mensagem
+      // Delay for btns
       const buttonTimer = setTimeout(() => {
         setShowButtons(true);
       }, 500);
@@ -31,20 +29,19 @@ const CreateAccountPage = () => {
   }, [step]);
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen bg-gray-100 py-6">
-      {/* Header */}
-      <div className="w-full bg-blue-500 text-white py-4 text-center text-xl font-bold">
-        Create Account
-      </div>
-
-      {/* Chat Box (altura fixa para evitar deslocamento da página) */}
-      <div className="flex flex-col gap-4 p-4 w-full max-w-md min-h-[300px]">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-6">
+      <div className="chat-container flex flex-col gap-4 w-full max-w-md p-4 overflow-hidden min-h-[200px]">
         {messages.slice(0, step).map((msg, index) => (
-          <div
-            key={index}
-            className="bg-blue-100 text-gray-800 p-3 rounded-lg shadow-md self-start opacity-100 transition-opacity duration-500"
-          >
-            {msg}
+          <div key={index} className="chat chat-start">
+            <div className="chat-image avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS chat bubble component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                />
+              </div>
+            </div>
+            <div className="chat-bubble">{msg}</div>
           </div>
         ))}
       </div>
@@ -54,13 +51,13 @@ const CreateAccountPage = () => {
         {showButtons && (
           <>
             <button
-              className="bg-cyan-500 text-white text-sm py-2 rounded-md shadow-md hover:bg-cyan-600"
+              className="btn btn-primary w-full mb-4"
               onClick={() => navigate("/RegisterBasic")}
             >
               Create New Account
             </button>
             <button
-              className="bg-gray-500 text-white text-sm py-2 rounded-md shadow-md hover:bg-gray-600"
+              className="btn btn-ghost w-full"
               onClick={() => navigate("/")}
             >
               Back to Initial Page
