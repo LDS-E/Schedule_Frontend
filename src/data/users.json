@@ -2,31 +2,31 @@
   {
     "id": 1,
     "name": "Alice",
-    "avatar": "https://via.placeholder.com/50",
+    "gender": "female",
+    "avatar": "",
     "nurseType": "RN",
-    "institution": "Health Care Institute",
     "department": "Cardiology",
-    "email": "alice@healthcare.com",
-    "password": "alice123"
+    "institution": "Health Care Institute",
+    "email": "alice@healthcare.com"
   },
   {
     "id": 2,
     "name": "Bob",
-    "avatar": "https://via.placeholder.com/50",
+    "gender": "male",
+    "avatar": "",
     "nurseType": "LPN",
-    "institution": "Health Care Institute",
     "department": "Cardiology",
-    "email": "bob@healthcare.com",
-    "password": "bob123"
+    "institution": "Health Care Institute",
+    "email": "bob@healthcare.com"
   },
   {
     "id": 3,
     "name": "Adriana",
-    "avatar": "https://via.placeholder.com/50",
+    "gender": "female",
+    "avatar": "",
     "nurseType": "Chief",
-    "institution": "Health Care Institute",
     "department": "Cardiology",
-    "email": "adriana@healthcare.com",
-    "password": "adriana123"
+    "institution": "Health Care Institute",
+    "email": "adriana@healthcare.com"
   }
 ]

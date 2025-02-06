@@ -11,6 +11,8 @@ import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader"; // Novo Header
 import Footer from "./components/Footer"; // Novo Footer
 import ShiftScheduler from "./components/ShiftScheduler";
+import MyTeamPage from "./pages/MyTeamPage";
+import TeamShiftsPage from "./pages/TeamSchiftsPage";
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -70,6 +72,8 @@ const App = () => {
           <Route path="/RegisterChief" element={<RegisterChief />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
+          <Route path="/MyTeamPage" element={<MyTeamPage />} />
+          <Route path="/TeamShiftsPage" element={<TeamShiftsPage />} />
           <Route
             path="/menu-profile"
             element={
