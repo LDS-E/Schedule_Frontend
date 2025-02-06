@@ -8,9 +8,10 @@ import RegisterBasic from "./pages/RegisterBasic";
 import RegisterRegularJumper from "./pages/RegisterRegularJumper";
 import RegisterChief from "./pages/RegisterChief";
 import PageShiftApproval from "./pages/PageShiftApproval";
-import MainHeader from "./components/MainHeader"; // Novo Header
-import Footer from "./components/Footer"; // Novo Footer
+import MainHeader from "./components/MainHeader";
+import Footer from "./components/Footer";
 import ShiftScheduler from "./components/ShiftScheduler";
+import AccountSettingsPage from "./pages/AccountSettingsPage"; // Nova página de configurações
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -43,10 +44,8 @@ const App = () => {
 
   return (
     <Router>
-      <MainHeader /> {/* Header visível em todas as páginas */}
+      <MainHeader />
       <div className="main-content">
-        {" "}
-        {/* Wrapper para manter o conteúdo alinhado */}
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/create-account" element={<CreateAccountPage />} />
@@ -71,6 +70,19 @@ const App = () => {
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
           <Route
+            path="/account-settings"
+            element={
+              isAuthenticated ? (
+                <AccountSettingsPage
+                  isAuthenticated={isAuthenticated}
+                  currentUser={currentUser}
+                />
+              ) : (
+                <div>Please log in first.</div>
+              )
+            }
+          />
+          <Route
             path="/menu-profile"
             element={
               isAuthenticated ? (
@@ -85,7 +97,7 @@ const App = () => {
           />
         </Routes>
       </div>
-      <Footer /> {/* Footer visível em todas as páginas */}
+      <Footer />
     </Router>
   );
 };
