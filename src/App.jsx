@@ -11,7 +11,9 @@ import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader";
 import Footer from "./components/Footer";
 import ShiftScheduler from "./components/ShiftScheduler";
-import AccountSettingsPage from "./pages/AccountSettingsPage"; // Nova página de configurações
+import MyTeamPage from "./pages/MyTeamPage";
+import TeamShiftsPage from "./pages/TeamSchiftsPage";
+import AccountSettingsPage from "./pages/AccountSettingsPage";
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -69,6 +71,8 @@ const App = () => {
           <Route path="/RegisterChief" element={<RegisterChief />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
+          <Route path="/MyTeamPage" element={<MyTeamPage />} />
+          <Route path="/TeamShiftsPage" element={<TeamShiftsPage />} />
           <Route
             path="/account-settings"
             element={
