@@ -1,5 +1,5 @@
 [
   { "date": "2025-02-06", "nurseId": 1, "shiftType": "Night" },
   { "date": "2025-02-06", "nurseId": 2, "shiftType": "Day" },
-  { "date": "2025-02-06", "nurseId": 2, "shiftType": "Half Day" }
+  { "date": "2025-02-06", "nurseId": 3, "shiftType": "Half Day" }
 ]
