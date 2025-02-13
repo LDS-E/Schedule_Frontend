@@ -1,5 +1,20 @@
 [
-  { "date": "2025-02-06", "nurseId": 1, "shiftType": "Night" },
-  { "date": "2025-02-06", "nurseId": 2, "shiftType": "Day" },
-  { "date": "2025-02-06", "nurseId": 2, "shiftType": "Half Day" }
+  {
+    "id": 1,
+    "date": "2025-02-06",
+    "nurseId": 1,
+    "shiftType": "Night",
+    "startTime": "19:00",
+    "endTime": "07:00",
+    "status": "approved"
+  },
+  {
+    "id": 2,
+    "date": "2025-02-06",
+    "nurseId": 2,
+    "shiftType": "Day",
+    "startTime": "07:00",
+    "endTime": "19:00",
+    "status": "pending"
+  }
 ]

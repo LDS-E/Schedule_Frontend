@@ -5,8 +5,6 @@ import CreateAccountPage from "./pages/CreateAccountPage";
 import MenuProfile from "./pages/MenuProfile";
 import LogIn from "./pages/LogIn";
 import RegisterBasic from "./pages/RegisterBasic";
-import RegisterRegularJumper from "./pages/RegisterRegularJumper";
-import RegisterChief from "./pages/RegisterChief";
 import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader";
 import Footer from "./components/Footer";
@@ -32,6 +30,7 @@ const App = () => {
       setIsAuthenticated(true);
       setCurrentUser(loggedUser);
       localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("currentUser", JSON.stringify(loggedUser)); // 🔹 Salva o usuário
     } else {
       alert("Invalid email or password!");
     }
@@ -39,8 +38,11 @@ const App = () => {
 
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
-    if (storedIsAuthenticated === "true") {
+    const storedUser = localStorage.getItem("currentUser");
+
+    if (storedIsAuthenticated === "true" && storedUser) {
       setIsAuthenticated(true);
+      setCurrentUser(JSON.parse(storedUser)); // 🔹 Converte o JSON armazenado de volta para objeto
     }
   }, []);
 
@@ -51,6 +53,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/create-account" element={<CreateAccountPage />} />
+
           <Route
             path="/login"
             element={
@@ -63,39 +66,49 @@ const App = () => {
               />
             }
           />
+
           <Route path="/RegisterBasic" element={<RegisterBasic />} />
-          <Route
-            path="/RegisterRegularJumper"
-            element={<RegisterRegularJumper />}
-          />
-          <Route path="/RegisterChief" element={<RegisterChief />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
           <Route path="/MyTeamPage" element={<MyTeamPage />} />
           <Route path="/TeamShiftsPage" element={<TeamShiftsPage />} />
+
           <Route
             path="/account-settings"
             element={
-              isAuthenticated ? (
+              isAuthenticated && currentUser ? (
                 <AccountSettingsPage
                   isAuthenticated={isAuthenticated}
                   currentUser={currentUser}
                 />
               ) : (
-                <div>Please log in first.</div>
+                <LogIn
+                  email={email}
+                  password={password}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                  handleLogin={handleLogin}
+                />
               )
             }
           />
+
           <Route
             path="/menu-profile"
             element={
-              isAuthenticated ? (
+              isAuthenticated && currentUser ? (
                 <MenuProfile
                   userType={currentUser?.nurseType}
                   userData={currentUser}
                 />
               ) : (
-                <div>Please log in first.</div>
+                <LogIn
+                  email={email}
+                  password={password}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                  handleLogin={handleLogin}
+                />
               )
             }
           />

@@ -5,11 +5,12 @@ const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // Call handleLogin
     handleLogin(email, password);
-    navigate("/menu-profile");
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (isAuthenticated === "true") {
+      navigate("/menu-profile"); // 🔹 Agora só redireciona se o login for bem-sucedido
+    }
   };
-
   return (
     <div className="flex items-center justify-center h-screen bg-base-200">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
