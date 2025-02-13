@@ -8,8 +8,8 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import shiftsData from "../data/shifts.json";
-import usersData from "../data/users.json";
+import shiftsData from "../../data/shifts.json";
+import usersData from "../../data/users.json";
 
 const shiftColors = {
   night: "bg-blue-500 text-white", // Blue for night shifts

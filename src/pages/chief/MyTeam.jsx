@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import usersData from "../data/users.json";
+import usersData from "../../data/users.json";
 
 const MyTeam = () => {
   const [users, setUsers] = useState([]);
