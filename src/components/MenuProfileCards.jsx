@@ -5,7 +5,7 @@ const MenuProfileCards = ({ userType }) => {
   const navigate = useNavigate();
 
   const cards = [
-    { title: "My Team Shifts", color: "bg-blue-500", route: "/TeamShifts" },
+    { title: "My Team Shifts", color: "bg-blue-500", route: "/TeamShiftsPage" },
     { title: "Schedule Plan", color: "bg-blue-500", route: "/ShiftScheduler" },
     { title: "My Team", color: "bg-blue-500", route: "/MyTeam" },
   ];
