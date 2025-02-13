@@ -9,11 +9,10 @@ import PageShiftApproval from "./pages/PageShiftApproval";
 import MainHeader from "./components/MainHeader";
 import Footer from "./components/Footer";
 import ShiftScheduler from "./components/ShiftScheduler";
-import MyTeamPage from "./pages/MyTeamPage";
-import TeamShiftsPage from "./pages/TeamSchiftsPage";
+import MyTeam from "./pages/MyTeam";
+import TeamShiftsPage from "./pages/TeamShiftsPage";
 import AccountSettingsPage from "./pages/AccountSettingsPage";
 import usersData from "./data/users.json";
-
 import "./App.css";
 
 const App = () => {
@@ -30,7 +29,7 @@ const App = () => {
       setIsAuthenticated(true);
       setCurrentUser(loggedUser);
       localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("currentUser", JSON.stringify(loggedUser)); // 🔹 Salva o usuário
+      localStorage.setItem("currentUser", JSON.stringify(loggedUser)); 
     } else {
       alert("Invalid email or password!");
     }
@@ -42,7 +41,7 @@ const App = () => {
 
     if (storedIsAuthenticated === "true" && storedUser) {
       setIsAuthenticated(true);
-      setCurrentUser(JSON.parse(storedUser)); // 🔹 Converte o JSON armazenado de volta para objeto
+      setCurrentUser(JSON.parse(storedUser)); 
     }
   }, []);
 
@@ -70,9 +69,8 @@ const App = () => {
           <Route path="/RegisterBasic" element={<RegisterBasic />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
-          <Route path="/MyTeamPage" element={<MyTeamPage />} />
+          <Route path="/MyTeam" element={<MyTeam />} />
           <Route path="/TeamShiftsPage" element={<TeamShiftsPage />} />
-
           <Route
             path="/account-settings"
             element={
