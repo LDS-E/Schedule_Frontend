@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AccountSettingsPage = ({ currentUser }) => {
+const AccountSettings = ({ currentUser }) => {
   const [formData, setFormData] = useState({
     name: currentUser?.name || "",
     email: currentUser?.email || "",
@@ -97,4 +97,4 @@ const AccountSettingsPage = ({ currentUser }) => {
   );
 };
 
-export default AccountSettingsPage;
+export default AccountSettings;

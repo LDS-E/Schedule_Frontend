@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
-import CreateAccountPage from "./pages/CreateAccountPage";
+import CreateAccount from "./pages/CreateAccount";
 import MenuProfile from "./pages/MenuProfile";
-import LogIn from "./pages/LogIn";
+import Login from "./pages/Login";
 import RegisterBasic from "./pages/RegisterBasic";
-import PageShiftApproval from "./pages/PageShiftApproval";
+import ShiftApproval from "./pages/nurse/ShiftApproval";
 import MainHeader from "./components/MainHeader";
 import Footer from "./components/Footer";
-import ShiftScheduler from "./components/ShiftScheduler";
-import MyTeam from "./pages/MyTeam";
-import TeamShiftsPage from "./pages/TeamShiftsPage";
-import AccountSettingsPage from "./pages/AccountSettingsPage";
+import ShiftScheduler from "./pages/chief/ShiftScheduler";
+import MyTeam from "./pages/chief/MyTeam";
+import TeamShifts from "./pages/chief/TeamShifts";
+import AccountSettings from "./pages/AccountSettings";
 import usersData from "./data/users.json";
 import "./App.css";
 
@@ -29,7 +29,7 @@ const App = () => {
       setIsAuthenticated(true);
       setCurrentUser(loggedUser);
       localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("currentUser", JSON.stringify(loggedUser)); 
+      localStorage.setItem("currentUser", JSON.stringify(loggedUser));
     } else {
       alert("Invalid email or password!");
     }
@@ -41,7 +41,7 @@ const App = () => {
 
     if (storedIsAuthenticated === "true" && storedUser) {
       setIsAuthenticated(true);
-      setCurrentUser(JSON.parse(storedUser)); 
+      setCurrentUser(JSON.parse(storedUser));
     }
   }, []);
 
@@ -51,12 +51,12 @@ const App = () => {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route path="/create-account" element={<CreateAccount />} />
 
           <Route
             path="/login"
             element={
-              <LogIn
+              <Login
                 email={email}
                 password={password}
                 setEmail={setEmail}
@@ -68,19 +68,19 @@ const App = () => {
 
           <Route path="/RegisterBasic" element={<RegisterBasic />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
-          <Route path="/ShiftApprovalPage" element={<PageShiftApproval />} />
+          <Route path="/ShiftApproval" element={<ShiftApproval />} />
           <Route path="/MyTeam" element={<MyTeam />} />
-          <Route path="/TeamShiftsPage" element={<TeamShiftsPage />} />
+          <Route path="/TeamShifts" element={<TeamShifts />} />
           <Route
             path="/account-settings"
             element={
               isAuthenticated && currentUser ? (
-                <AccountSettingsPage
+                <AccountSettings
                   isAuthenticated={isAuthenticated}
                   currentUser={currentUser}
                 />
               ) : (
-                <LogIn
+                <Login
                   email={email}
                   password={password}
                   setEmail={setEmail}
@@ -100,7 +100,7 @@ const App = () => {
                   userData={currentUser}
                 />
               ) : (
-                <LogIn
+                <Login
                   email={email}
                   password={password}
                   setEmail={setEmail}

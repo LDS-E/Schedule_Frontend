@@ -1,6 +1,8 @@
-import ShiftApprovalCalendar from "../components/ShiftApprovalCalendar";
+// ShiftApproval.js ⬅️ (New) For nurses to approve or refuse shift plan from chief
 
-const PageShiftApproval = ({ shifts }) => {
+// import ShiftNurseApproval from "../../components/ShiftNurseApproval";
+
+const ShiftApproval = ({ shifts }) => {
   const handleApprove = (day) => {
     alert(`Shift on day ${day} approved!`);
   };
@@ -12,7 +14,7 @@ const PageShiftApproval = ({ shifts }) => {
   };
 
   return (
-    <ShiftApprovalCalendar
+    <ShiftNurseApproval
       shifts={shifts}
       onApprove={handleApprove}
       onEdit={handleEdit}
@@ -20,4 +22,4 @@ const PageShiftApproval = ({ shifts }) => {
   );
 };
 
-export default PageShiftApproval;
+export default ShiftApproval;
