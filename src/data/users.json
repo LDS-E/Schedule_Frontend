@@ -7,7 +7,8 @@
     "nurseType": "RN",
     "department": "Cardiology",
     "institution": "Health Care Institute",
-    "email": "alice@healthcare.com"
+    "email": "alice@healthcare.com",
+    "password": "alice123"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "nurseType": "LPN",
     "department": "Cardiology",
     "institution": "Health Care Institute",
-    "email": "bob@healthcare.com"
+    "email": "bob@healthcare.com",
+    "password": "bob123"
   },
   {
     "id": 3,
@@ -27,6 +29,7 @@
     "nurseType": "Chief",
     "department": "Cardiology",
     "institution": "Health Care Institute",
-    "email": "adriana@healthcare.com"
+    "email": "adriana@healthcare.com",
+    "password": "adriana123"
   }
 ]
