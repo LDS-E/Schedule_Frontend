@@ -1,8 +1,33 @@
-# React + Vite
+# 🏥 HCProject - Schedule Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HCProject is a schedule management system designed for healthcare professionals, enabling nurses and administrators to efficiently organize work shifts in an intuitive way.
 
-Currently, two official plugins are available:
+This project uses **React (Vite) for the frontend** and **Node.js + Express for the backend**, with **MongoDB** as the database.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+
+- ✅ **User Authentication** – Secure login for healthcare professionals.
+- ✅ **Shift Management** – Register, approve, and view work schedules.
+- ✅ **Personalized Profiles** – Each user has access to their specific information and permissions.
+- ✅ **Team & Administration Control** – Manage teams and collective schedules.
+- ✅ **MongoDB Database** – Secure and scalable data storage.
+
+## 🏗 Technologies Used
+
+### **Frontend** 📱
+- React (Vite)
+- React Router
+- Tailwind CSS
+
+### **Backend** 💻
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT for authentication
+
+
+### 🔧 **Future Enhancements**
+✨ Shift Notifications – Alerts for schedule changes and approvals.
+🔄 Google Calendar Integration – Automatic sync with calendars.
+📊 Analytics Dashboard – Detailed reports on shifts and availability.
+
+Developed by: [LDS-E and AdriannaB79]
