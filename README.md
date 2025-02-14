@@ -26,8 +26,8 @@ This project uses **React (Vite) for the frontend** and **Node.js + Express for 
 
 
 ### 🔧 **Future Enhancements**
-✨ Shift Notifications – Alerts for schedule changes and approvals.
-🔄 Google Calendar Integration – Automatic sync with calendars.
-📊 Analytics Dashboard – Detailed reports on shifts and availability.
+- Shift Notifications – Alerts for schedule changes and approvals.
+- Google Calendar Integration – Automatic sync with calendars.
+- Analytics Dashboard – Detailed reports on shifts and availability.
 
 Developed by: [LDS-E and AdriannaB79]
