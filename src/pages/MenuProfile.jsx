@@ -1,4 +1,3 @@
-import React from "react";
 import MenuProfileCards from "../components/MenuProfileCards";
 import MainHeader from "../components/MainHeader";
 

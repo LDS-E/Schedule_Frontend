@@ -12,6 +12,7 @@ import ShiftScheduler from "./pages/chief/ShiftScheduler";
 import MyTeam from "./pages/chief/MyTeam";
 import TeamShifts from "./pages/chief/TeamShifts";
 import AccountSettings from "./pages/AccountSettings";
+import MyShifts from "./pages/nurse/MyShifts";
 import usersData from "./data/users.json";
 import "./App.css";
 
@@ -71,6 +72,7 @@ const App = () => {
           <Route path="/ShiftApproval" element={<ShiftApproval />} />
           <Route path="/MyTeam" element={<MyTeam />} />
           <Route path="/TeamShifts" element={<TeamShifts />} />
+          <Route path="/MyShifts" element={<MyShifts />} />
           <Route
             path="/account-settings"
             element={
@@ -96,7 +98,7 @@ const App = () => {
             element={
               isAuthenticated && currentUser ? (
                 <MenuProfile
-                  userType={currentUser?.nurseType}
+                  userType={currentUser?.userType}
                   userData={currentUser}
                 />
               ) : (
