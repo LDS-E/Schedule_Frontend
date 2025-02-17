@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const MenuProfileCards = ({ userType }) => {
   const navigate = useNavigate();
 
-  // Cards específicos para "Chief"
   const chiefCards = [
     {
       title: "Shift Scheduler",
@@ -15,13 +14,11 @@ const MenuProfileCards = ({ userType }) => {
     { title: "Team Shifts", color: "bg-blue-500", route: "/TeamShifts" },
   ];
 
-  // Cards específicos para outros tipos de usuários (RN, LPN, etc.)
   const otherUserCards = [
     { title: "My Shifts", color: "bg-green-500", route: "/MyShifts" },
     { title: "Shift Approval", color: "bg-green-500", route: "/ShiftApproval" },
   ];
 
-  // Dependendo do tipo de usuário, exibe os cards apropriados
   const cardsToDisplay = userType === "Chief" ? chiefCards : otherUserCards;
 
   const handleCardClick = (route) => {

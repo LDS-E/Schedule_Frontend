@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBasic = () => {
-  const [userType, setUserType] = useState(""); // State to track user type
-  const navigate = useNavigate(); // React Router's navigate function
+  const [userType, setUserType] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
-    // Navigate to the appropriate page based on the selected user type
     if (userType === "Regular" || userType === "Jumper") {
       navigate("/RegisterRegularJumper");
     } else if (userType === "Chief") {
@@ -21,7 +20,6 @@ const RegisterBasic = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-[url('./src/backgrounds/1.png')] bg-cover bg-center">
       <div className="w-[900px] bg-white/75 p-8 rounded-lg shadow-xl border-2 border-blue-700 relative">
-        {/* Title */}
         <h2 className="text-center text-2xl font-bold text-blue-900 mb-6">
           Creating your account
         </h2>
@@ -44,9 +42,7 @@ const RegisterBasic = () => {
             </label>
           </div>
 
-          {/* Form Fields */}
           <div className="grid grid-cols-2 gap-4 w-full">
-            {/* E-mail */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 E-mail
@@ -58,7 +54,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Medical ID */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Medical ID
@@ -70,7 +65,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Name
@@ -82,7 +76,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Gender */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Gender
@@ -94,7 +87,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Password
@@ -106,7 +98,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Address */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Address
@@ -118,7 +109,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* User Type */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 User Type
@@ -130,7 +120,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Contract Details */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Contract Details
@@ -142,7 +131,6 @@ const RegisterBasic = () => {
               />
             </div>
 
-            {/* Department */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Department
@@ -156,7 +144,6 @@ const RegisterBasic = () => {
           </div>
         </form>
 
-        {/* Submit Button */}
         <div className="absolute bottom-4 right-4">
           <button
             type="submit"

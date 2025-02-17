@@ -1,13 +1,47 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, Sun, Moon } from "lucide-react";
 
-const MainHeader = ({ user, toggleTheme, isDarkMode }) => {
+const MainHeader = ({ toggleTheme, isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null); // Armazenando o usuário
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("currentUser");
+    setUser(null);
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedUser = localStorage.getItem("currentUser");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      } else {
+        setUser(null);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    handleStorageChange();
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   return (
     <header className="navbar bg-blue-600 text-white fixed w-full top-0 shadow-md z-50">
-      {/* Menu Dropdown na esquerda */}
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -44,8 +78,6 @@ const MainHeader = ({ user, toggleTheme, isDarkMode }) => {
             </li>
             <li>
               <button className="btn btn-ghost">
-                {" "}
-                {/* change this btn fo a link */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -75,7 +107,9 @@ const MainHeader = ({ user, toggleTheme, isDarkMode }) => {
                   </Link>
                 </li>
                 <li>
-                  <button className="btn btn-ghost">Logout</button>
+                  <button className="btn btn-ghost" onClick={handleLogout}>
+                    Logout
+                  </button>
                 </li>
               </>
             )}
@@ -90,33 +124,11 @@ const MainHeader = ({ user, toggleTheme, isDarkMode }) => {
       </div>
 
       <div className="navbar-end">
-        {/* older */}
-        <button className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
-          </div>
-        </button>
-
-        {/* Avatar/Login */}
         {user ? (
           <div className="flex items-center gap-2">
             <span className="text-sm">Hello, {user.name}</span>
             <img
-              src={user.avatar}
+              src={user.avatar || "/default-avatar.png"}
               alt="User Avatar"
               className="w-8 h-8 rounded-full border border-white"
             />

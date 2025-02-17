@@ -43,12 +43,15 @@ const App = () => {
     if (storedIsAuthenticated === "true" && storedUser) {
       setIsAuthenticated(true);
       setCurrentUser(JSON.parse(storedUser));
+    } else {
+      setIsAuthenticated(false);
+      setCurrentUser(null);
     }
   }, []);
 
   return (
     <Router>
-      <MainHeader />
+      <MainHeader user={currentUser} isAuthenticated={isAuthenticated} />
       <div className="main-content">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
