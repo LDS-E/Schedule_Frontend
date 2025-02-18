@@ -26,6 +26,7 @@ const App = () => {
     const loggedUser = usersData.find(
       (user) => user.email === email && user.password === password
     );
+
     if (loggedUser) {
       setIsAuthenticated(true);
       setCurrentUser(loggedUser);
@@ -36,6 +37,12 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("currentUser");
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+  };
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
     const storedUser = localStorage.getItem("currentUser");
@@ -51,7 +58,11 @@ const App = () => {
 
   return (
     <Router>
-      <MainHeader user={currentUser} isAuthenticated={isAuthenticated} />
+      <MainHeader
+        user={currentUser}
+        isAuthenticated={isAuthenticated}
+        handleLogout={handleLogout}
+      />
       <div className="main-content">
         <Routes>
           <Route path="/" element={<WelcomePage />} />

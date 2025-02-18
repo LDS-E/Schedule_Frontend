@@ -2,43 +2,14 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Sun, Moon } from "lucide-react";
 
-const MainHeader = ({ toggleTheme, isDarkMode }) => {
+const MainHeader = ({
+  user,
+  isAuthenticated,
+  handleLogout,
+  toggleTheme,
+  isDarkMode,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null); // Armazenando o usuário
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("currentUser");
-    setUser(null);
-    navigate("/login");
-  };
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const storedUser = localStorage.getItem("currentUser");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
-        setUser(null);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    handleStorageChange();
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
 
   return (
     <header className="navbar bg-blue-600 text-white fixed w-full top-0 shadow-md z-50">
