@@ -9,9 +9,9 @@ const ShiftScheduler = () => {
   const [shifts, setShifts] = useState({});
 
   const nurses = [
-    { id: 1, name: "Anna", nurseType: "Regular" },
-    { id: 2, name: "Bob", nurseType: "Jumper" },
-    { id: 3, name: "Adrianna", nurseType: "Chief" },
+    { id: 1, name: "Anna", userType: "Regular" },
+    { id: 2, name: "Bob", userType: "Jumper" },
+    { id: 3, name: "Adrianna", userType: "Chief" },
   ];
 
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -74,7 +74,7 @@ const ShiftScheduler = () => {
                 <option value="">Select Nurse</option>
                 {nurses.map((nurse) => (
                   <option key={nurse.id} value={nurse.name}>
-                    {nurse.name} ({nurse.nurseType})
+                    {nurse.name} ({nurse.userType})
                   </option>
                 ))}
               </select>

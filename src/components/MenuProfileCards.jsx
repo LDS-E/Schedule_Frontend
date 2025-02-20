@@ -4,11 +4,22 @@ import { useNavigate } from "react-router-dom";
 const MenuProfileCards = ({ userType }) => {
   const navigate = useNavigate();
 
-  const cards = [
-    { title: "My Team Shifts", color: "bg-blue-500", route: "/TeamShiftsPage" },
-    { title: "Schedule Plan", color: "bg-blue-500", route: "/ShiftScheduler" },
+  const chiefCards = [
+    {
+      title: "Shift Scheduler",
+      color: "bg-blue-500",
+      route: "/ShiftScheduler",
+    },
     { title: "My Team", color: "bg-blue-500", route: "/MyTeam" },
+    { title: "Team Shifts", color: "bg-blue-500", route: "/TeamShifts" },
   ];
+
+  const otherUserCards = [
+    { title: "My Shifts", color: "bg-green-500", route: "/MyShifts" },
+    { title: "Shift Approval", color: "bg-green-500", route: "/ShiftApproval" },
+  ];
+
+  const cardsToDisplay = userType === "Chief" ? chiefCards : otherUserCards;
 
   const handleCardClick = (route) => {
     navigate(route);
@@ -17,7 +28,7 @@ const MenuProfileCards = ({ userType }) => {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="flex justify-center gap-12">
-        {cards.map((card, index) => (
+        {cardsToDisplay.map((card, index) => (
           <div
             key={index}
             onClick={() => handleCardClick(card.route)}
