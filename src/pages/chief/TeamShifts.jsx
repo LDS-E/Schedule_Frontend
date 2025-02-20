@@ -17,7 +17,7 @@ const shiftColors = {
   halfday: "bg-green-300 text-white", // Green for half-day shifts
 };
 
-const TeamShiftsPage = () => {
+const TeamShifts = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -182,4 +182,4 @@ const TeamShiftsPage = () => {
   );
 };
 
-export default TeamShiftsPage;
+export default TeamShifts;

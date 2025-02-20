@@ -6,6 +6,7 @@ import MenuProfile from "./pages/MenuProfile";
 import Login from "./pages/Login";
 import RegisterBasic from "./pages/RegisterBasic";
 import ShiftApproval from "./pages/nurse/ShiftApproval";
+import MyShifts from "./pages/nurse/MyShifts";
 import MainHeader from "./components/MainHeader";
 import Footer from "./components/Footer";
 import ShiftScheduler from "./pages/chief/ShiftScheduler";
@@ -13,6 +14,7 @@ import MyTeam from "./pages/chief/MyTeam";
 import TeamShifts from "./pages/chief/TeamShifts";
 import AccountSettings from "./pages/AccountSettings";
 import usersData from "./data/users.json";
+
 import "./App.css";
 
 const App = () => {
@@ -69,6 +71,7 @@ const App = () => {
           <Route path="/RegisterBasic" element={<RegisterBasic />} />
           <Route path="/ShiftScheduler" element={<ShiftScheduler />} />
           <Route path="/ShiftApproval" element={<ShiftApproval />} />
+          <Route path="/MyShifts" element={<MyShifts />} />
           <Route path="/MyTeam" element={<MyTeam />} />
           <Route path="/TeamShifts" element={<TeamShifts />} />
           <Route
