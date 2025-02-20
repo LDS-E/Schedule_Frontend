@@ -6,7 +6,7 @@ const ShiftApproval = ({ currentUser }) => {
   const [shifts, setShifts] = useState([]);
 
   useEffect(() => {
-    if (currentUser && (nurseType === "RN" || nurseType === "LPN")) {
+    if (currentUser && (userType === "RN" || userType === "LPN")) {
       const storedShifts = JSON.parse(localStorage.getItem("shifts")) || [];
       const userShifts = storedShifts.filter(
         (shift) => shift.nurseId === currentUser.id

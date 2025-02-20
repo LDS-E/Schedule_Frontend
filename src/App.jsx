@@ -13,7 +13,6 @@ import ShiftScheduler from "./pages/chief/ShiftScheduler";
 import MyTeam from "./pages/chief/MyTeam";
 import TeamShifts from "./pages/chief/TeamShifts";
 import AccountSettings from "./pages/AccountSettings";
-import MyShifts from "./pages/nurse/MyShifts";
 import usersData from "./data/users.json";
 
 import "./App.css";
