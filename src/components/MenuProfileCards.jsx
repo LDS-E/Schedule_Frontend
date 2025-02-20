@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const MenuProfileCards = ({ userType }) => {
   const navigate = useNavigate();
 
+
   const chiefCards = [
     {
       title: "Shift Scheduler",
