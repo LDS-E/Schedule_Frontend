@@ -13,6 +13,7 @@ import ShiftScheduler from "./pages/chief/ShiftScheduler";
 import MyTeam from "./pages/chief/MyTeam";
 import TeamShifts from "./pages/chief/TeamShifts";
 import AccountSettings from "./pages/AccountSettings";
+import MyShifts from "./pages/nurse/MyShifts";
 import usersData from "./data/users.json";
 
 import "./App.css";
@@ -27,6 +28,7 @@ const App = () => {
     const loggedUser = usersData.find(
       (user) => user.email === email && user.password === password
     );
+
     if (loggedUser) {
       setIsAuthenticated(true);
       setCurrentUser(loggedUser);
@@ -37,6 +39,12 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("currentUser");
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+  };
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
     const storedUser = localStorage.getItem("currentUser");
@@ -44,12 +52,19 @@ const App = () => {
     if (storedIsAuthenticated === "true" && storedUser) {
       setIsAuthenticated(true);
       setCurrentUser(JSON.parse(storedUser));
+    } else {
+      setIsAuthenticated(false);
+      setCurrentUser(null);
     }
   }, []);
 
   return (
     <Router>
-      <MainHeader />
+      <MainHeader
+        user={currentUser}
+        isAuthenticated={isAuthenticated}
+        handleLogout={handleLogout}
+      />
       <div className="main-content">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
@@ -74,6 +89,7 @@ const App = () => {
           <Route path="/MyShifts" element={<MyShifts />} />
           <Route path="/MyTeam" element={<MyTeam />} />
           <Route path="/TeamShifts" element={<TeamShifts />} />
+          <Route path="/MyShifts" element={<MyShifts />} />
           <Route
             path="/account-settings"
             element={
@@ -99,7 +115,7 @@ const App = () => {
             element={
               isAuthenticated && currentUser ? (
                 <MenuProfile
-                  userType={currentUser?.nurseType}
+                  userType={currentUser?.userType}
                   userData={currentUser}
                 />
               ) : (
