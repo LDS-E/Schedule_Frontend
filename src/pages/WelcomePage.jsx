@@ -23,16 +23,18 @@ const WelcomePage = () => {
       </h1>
 
       <div className="flex flex-col items-center space-y-4 w-64 relative">
-        <Link to="/create-account">
-          <button className="w-full px-6 py-3 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
-            Create an Account
-          </button>
+        <Link
+          to="/create-account"
+          className="w-full px-6 py-3 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Create an Account
         </Link>
 
-        <Link to="/login">
-          <button className="w-full px-6 py-3 text-lg font-semibold text-white bg-[#4A00FF] rounded-lg shadow-md hover:bg-green-600 transition duration-300">
-            Login
-          </button>
+        <Link
+          to="/login"
+          className="w-full px-6 py-3 text-lg font-semibold text-white bg-[#4A00FF] rounded-lg shadow-md hover:bg-green-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Login
         </Link>
       </div>
     </div>

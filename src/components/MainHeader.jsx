@@ -4,6 +4,7 @@ import { Menu, Sun, Moon } from "lucide-react";
 
 const MainHeader = ({
   user,
+
   isAuthenticated,
   handleLogout,
   toggleTheme,

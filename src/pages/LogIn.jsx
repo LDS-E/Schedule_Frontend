@@ -1,16 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
+const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = () => {
-    handleLogin(email, password);
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated === "true") {
-      navigate("/menu-profile"); // 🔹 Agora só redireciona se o login for bem-sucedido
+  const handleSubmit = async () => {
+    setError(null); // Limpa mensagens de erro anteriores
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage =
+          errorData.message || `Login failed with status ${response.status}`;
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("isAuthenticated", "true");
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/menu-profile");
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(error.message);
     }
   };
+
   return (
     <div className="relative min-h-screen bg-gray-100 flex flex-col">
       {/* Background Patterns */}
@@ -20,7 +47,6 @@ const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[60deg] top-10 right-40"></div>
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[85deg] top-30 right-80"></div>
       </div>
-
       {/* Form Section */}
       <div className="relative z-10 flex items-center justify-center h-screen">
         <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
@@ -75,4 +101,4 @@ const LogIn = ({ email, password, setEmail, setPassword, handleLogin }) => {
   );
 };
 
-export default LogIn;
+export default Login;

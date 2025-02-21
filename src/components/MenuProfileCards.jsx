@@ -1,8 +1,11 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-const MenuProfileCards = ({ userType }) => {
+const MenuProfileCards = ({ user }) => {
   const navigate = useNavigate();
+
+  // Pegamos o userType dentro do componente
+  const userType = user?.userType || ""; // Evita erro se user for undefined
 
   const chiefCards = [
     {
@@ -19,11 +22,8 @@ const MenuProfileCards = ({ userType }) => {
     { title: "Shift Approval", color: "bg-green-500", route: "/ShiftApproval" },
   ];
 
+  // Escolhemos os cards com base no userType
   const cardsToDisplay = userType === "Chief" ? chiefCards : otherUserCards;
-
-  const handleCardClick = (route) => {
-    navigate(route);
-  };
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -31,7 +31,7 @@ const MenuProfileCards = ({ userType }) => {
         {cardsToDisplay.map((card, index) => (
           <div
             key={index}
-            onClick={() => handleCardClick(card.route)}
+            onClick={() => navigate(card.route)}
             className="w-64 h-32 bg-white shadow-lg cursor-pointer hover:scale-105 transform duration-300"
           >
             <div
@@ -44,6 +44,13 @@ const MenuProfileCards = ({ userType }) => {
       </div>
     </div>
   );
+};
+
+// 🔹 Agora validamos `user` ao invés de `userType`
+MenuProfileCards.propTypes = {
+  user: PropTypes.shape({
+    userType: PropTypes.string.isRequired, // userType é uma string obrigatória dentro do objeto user
+  }).isRequired,
 };
 
 export default MenuProfileCards;
