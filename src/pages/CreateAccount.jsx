@@ -46,7 +46,6 @@ const CreateAccountPage = () => {
         ))}
       </div>
 
-      {/* Espaço reservado para os botões */}
       <div className="w-full max-w-md flex flex-col gap-2 mt-4 min-h-[80px]">
         {showButtons && (
           <>

@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 const MenuProfileCards = ({ user }) => {
   const navigate = useNavigate();
 
-  // Pegamos o userType dentro do componente
-  const userType = user?.userType || ""; // Evita erro se user for undefined
-
   const chiefCards = [
     {
       title: "Shift Scheduler",
@@ -17,13 +14,34 @@ const MenuProfileCards = ({ user }) => {
     { title: "Team Shifts", color: "bg-blue-500", route: "/TeamShifts" },
   ];
 
-  const otherUserCards = [
+  const rnCards = [
+    // Cards for RN
     { title: "My Shifts", color: "bg-green-500", route: "/MyShifts" },
     { title: "Shift Approval", color: "bg-green-500", route: "/ShiftApproval" },
   ];
 
-  // Escolhemos os cards com base no userType
-  const cardsToDisplay = userType === "Chief" ? chiefCards : otherUserCards;
+  const lpnCards = [
+    // Cards for LPN
+    { title: "My Shifts", color: "bg-yellow-500", route: "/MyShifts" },
+    { title: "Availability", color: "bg-yellow-500", route: "/Availability" },
+  ];
+
+  let cardsToDisplay = [];
+
+  switch (user.userType) {
+    case "Chief":
+      cardsToDisplay = chiefCards;
+      break;
+    case "RN":
+      cardsToDisplay = rnCards;
+      break;
+    case "LPN":
+      cardsToDisplay = lpnCards;
+      break;
+    default:
+      cardsToDisplay = [];
+      console.warn("Tipo de usuário desconhecido:", user.userType);
+  }
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -46,10 +64,9 @@ const MenuProfileCards = ({ user }) => {
   );
 };
 
-// 🔹 Agora validamos `user` ao invés de `userType`
 MenuProfileCards.propTypes = {
   user: PropTypes.shape({
-    userType: PropTypes.string.isRequired, // userType é uma string obrigatória dentro do objeto user
+    userType: PropTypes.string.isRequired,
   }).isRequired,
 };
 

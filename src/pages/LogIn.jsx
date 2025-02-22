@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { updateUser } = useContext(AuthContext);
 
-  const handleSubmit = async () => {
-    setError(null); // Limpa mensagens de erro anteriores
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -28,73 +33,72 @@ const Login = () => {
 
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      localStorage.setItem("isAuthenticated", "true");
-
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/menu-profile");
+      updateUser(data.user);
+      navigate("/menu");
     } catch (error) {
       console.error("Login error:", error);
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-100 flex flex-col">
-      {/* Background Patterns */}
+    <div className="hero min-h-screen bg-base-200">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[30deg] top-20 left-20"></div>
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[45deg] top-40 left-60"></div>
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[60deg] top-10 right-40"></div>
         <div className="absolute w-96 h-96 border border-blue-700 opacity-20 rotate-[85deg] top-30 right-80"></div>
       </div>
-      {/* Form Section */}
-      <div className="relative z-10 flex items-center justify-center h-screen">
-        <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-semibold text-center mb-6">Log In</h2>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="form-control mb-6">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <button
-            className="btn btn-primary w-full mb-4"
-            onClick={handleSubmit}
-          >
-            Login
-          </button>
-
-          <button
-            className="btn btn-ghost w-full"
-            onClick={() => navigate("/")}
-          >
-            Back to Home
-          </button>
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <form className="card-body" onSubmit={handleSubmit}>
+            <h2 className="text-3xl font-bold">Login</h2>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="email"
+                className="input input-bordered"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="password"
+                className="input input-bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
+                  Forgot password?
+                </a>
+              </label>
+            </div>
+            <div className="form-control mt-6">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Login"}
+              </button>
+            </div>
+            {error && <p className="text-red-500">{error}</p>}
+          </form>
         </div>
       </div>
     </div>

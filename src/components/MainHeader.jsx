@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Sun, Moon } from "lucide-react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-const MainHeader = ({
-  user,
-
-  isAuthenticated,
-  handleLogout,
-  toggleTheme,
-  isDarkMode,
-}) => {
+const MainHeader = ({ toggleTheme, isDarkMode, clearUser }) => {
+  const { user, isAuthenticated } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -79,7 +75,7 @@ const MainHeader = ({
                   </Link>
                 </li>
                 <li>
-                  <button className="btn btn-ghost" onClick={handleLogout}>
+                  <button className="btn btn-ghost" onClick={clearUser}>
                     Logout
                   </button>
                 </li>
@@ -96,14 +92,37 @@ const MainHeader = ({
       </div>
 
       <div className="navbar-end">
-        {user ? (
+        {isAuthenticated ? (
           <div className="flex items-center gap-2">
-            <span className="text-sm">Hello, {user.name}</span>
+            <span className="text-sm">
+              Hello, {user?.firstName || user?.name || "User"}
+            </span>{" "}
             <img
-              src={user.avatar || "/default-avatar.png"}
+              src={user?.avatar || "/default-avatar.png"}
               alt="User Avatar"
               className="w-8 h-8 rounded-full border border-white"
             />
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={user?.avatar || "/default-avatar.png"}
+                    alt="Avatar"
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
+              >
+                <li>
+                  <Link to="/settings">Settings</Link>
+                </li>
+                <li>
+                  <button onClick={clearUser}>Logout</button>
+                </li>
+              </ul>
+            </div>
           </div>
         ) : (
           <Link to="/login" className="btn btn-ghost btn-circle">
