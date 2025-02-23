@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import WelcomePage from "./pages/WelcomePage";
 import CreateAccount from "./pages/CreateAccount";
 import RegisterBasic from "./pages/RegisterBasic";
+import AccountSettings from "./pages/AccountSettings";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,6 +43,16 @@ function App() {
           element={
             <PrivateRoute>
               <MenuProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route // Adicione a rota para AccountSettings
+          path="/settings" // Defina o caminho para a página de configurações
+          element={
+            <PrivateRoute>
+              {" "}
+              {/* Proteja a rota com PrivateRoute */}
+              <AccountSettings /> {/* Renderize o componente AccountSettings */}
             </PrivateRoute>
           }
         />
