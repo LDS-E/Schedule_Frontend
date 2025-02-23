@@ -64,10 +64,11 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="email"
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="email" // Adicione esta linha
               />
             </div>
             <div className="form-control">
@@ -77,7 +78,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
