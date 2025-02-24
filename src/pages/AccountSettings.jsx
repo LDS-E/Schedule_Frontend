@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 
 const AccountSettings = () => {
   const { user, updateUser, clearUser } = useContext(AuthContext);
@@ -85,7 +86,7 @@ const AccountSettings = () => {
         contractDetails: formData.contractDetails,
         dateOfBirth: formData.dateOfBirth,
         medicalId: formData.medicalId,
-        avatar: profileImage, // Inclua a imagem, caso tenha sido atualizada
+        avatar: profileImage,
       };
 
       const response = await fetch(
@@ -107,10 +108,8 @@ const AccountSettings = () => {
 
       const updatedUserData = await response.json();
 
-      // Atualizando o contexto com os dados mais recentes
       updateUser(updatedUserData.user);
 
-      // Atualizando o estado local com os dados mais recentes
       setFormData({
         firstName: updatedUserData.user.firstName,
         lastName: updatedUserData.user.lastName,
@@ -139,7 +138,12 @@ const AccountSettings = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("deleteConfirmation:", deleteConfirmation);
+  }, [deleteConfirmation]);
+
   const handleDeleteClick = () => {
+    console.log("Botão de deletar clicado!");
     setDeleteConfirmation(true);
   };
 
@@ -151,20 +155,23 @@ const AccountSettings = () => {
       setDeleting(false);
       return;
     }
-
+    console.log("Iniciando requisição para deletar usuário...");
     try {
-      const response = await fetch(`/api/users/${user._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
+      const response = await fetch(
+        `http://localhost:5000/api/users/${user._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("Resposta recebida:", response);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Falha ao deletar usuário");
       }
-
+      console.log("Usuário deletado com sucesso!");
       clearUser();
       navigate("/login");
     } catch (error) {
@@ -177,12 +184,12 @@ const AccountSettings = () => {
     }
   };
 
+  console.log("Renderizando - deleteConfirmation:", deleteConfirmation);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-base-200 p-4">
       <div className="card w-full max-w-4xl bg-base-100 shadow-xl p-6">
-        {/* ... (cabeçalho) */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          {/* ... (avatar e upload) */}
           <div className="flex-1 w-full">
             <div className="flex flex-wrap gap-4">
               {Object.keys(formData).map((key) => (
@@ -228,9 +235,7 @@ const AccountSettings = () => {
             </div>
           </div>
         </div>
-
         <div className="divider"></div>
-
         <div className="flex justify-end gap-4">
           {!isEditing ? (
             <button
@@ -253,45 +258,45 @@ const AccountSettings = () => {
             Delete Account
           </button>
         </div>
-
         {/* Modal de confirmação de exclusão */}
-        {deleteConfirmation && (
-          <div className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Delete Account</h3>
-              <p className="py-4">
-                Are you sure you want to delete your account? This action cannot
-                be undone.
-              </p>
-              <input
-                type="email"
-                placeholder="Type your email to confirm"
-                className="input input-bordered w-full mt-4"
-                value={deleteEmailConfirmation}
-                onChange={(e) => setDeleteEmailConfirmation(e.target.value)}
-              />
-              {deleteError && (
-                <p className="text-red-500 mt-2">{deleteError}</p>
-              )}
-              <div className="modal-action mt-6">
-                <button
-                  onClick={handleDeleteConfirm}
-                  className="btn btn-error"
-                  disabled={deleting}
-                >
-                  {deleting ? "Deleting..." : "Confirm Delete"}
-                </button>
-                <button
-                  onClick={() => setDeleteConfirmation(false)}
-                  className="btn"
-                >
-                  Cancel
-                </button>
+        {deleteConfirmation &&
+          createPortal(
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="modal-box z-50">
+                <h3 className="font-bold text-lg">Delete Account</h3>
+                <p className="py-4">
+                  Are you sure you want to delete your account? This action
+                  cannot be undone.
+                </p>
+                <input
+                  type="email"
+                  placeholder="Type your email to confirm"
+                  className="input input-bordered w-full mt-4"
+                  value={deleteEmailConfirmation}
+                  onChange={(e) => setDeleteEmailConfirmation(e.target.value)}
+                />
+                {deleteError && (
+                  <p className="text-red-500 mt-2">{deleteError}</p>
+                )}
+                <div className="modal-action mt-6">
+                  <button
+                    onClick={handleDeleteConfirm}
+                    className="btn btn-error"
+                    disabled={deleting}
+                  >
+                    {deleting ? "Deleting..." : "Confirm Delete"}
+                  </button>
+                  <button
+                    onClick={() => setDeleteConfirmation(false)}
+                    className="btn"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
-        {updateError && <p className="text-red-500 mt-2">{updateError}</p>}
+            </div>,
+            document.body
+          )}
       </div>
     </div>
   );
