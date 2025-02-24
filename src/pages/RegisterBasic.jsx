@@ -2,18 +2,58 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBasic = () => {
-  const [userType, setUserType] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    medicalId: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    password: "",
+    country: "",
+    city: "",
+    street: "",
+    zipCode: "",
+    phoneNumber: "",
+    userType: "",
+    contractDetails: "",
+    department: "",
+    institution: "",
+    dateOfBirth: null,
+  });
+
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, dateOfBirth: date });
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (userType === "Regular" || userType === "Jumper") {
-      navigate("/RegisterRegularJumper");
-    } else if (userType === "Chief") {
-      navigate("/RegisterChief");
-    } else {
-      alert("Please select a valid user type.");
+    try {
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Registration failed");
+      }
+
+      alert("Registration successful!");
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert(error.message);
     }
   };
 
@@ -25,7 +65,6 @@ const RegisterBasic = () => {
         </h2>
 
         <form onSubmit={handleRegister} className="flex gap-8">
-          {/* Profile Picture Upload */}
           <div className="flex flex-col items-center gap-4">
             <div className="w-40 h-40 bg-gray-300 rounded-full flex items-center justify-center text-gray-700 text-sm">
               No Image
@@ -43,115 +82,83 @@ const RegisterBasic = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4 w-full">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                E-mail
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
+            {Object.keys(formData).map((key) => (
+              <div key={key}>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {key === "firstName"
+                    ? "First Name"
+                    : key === "lastName"
+                    ? "Last Name"
+                    : key.charAt(0).toUpperCase() + key.slice(1)}
+                </label>
+                {key === "gender" ? (
+                  <select
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                ) : key === "userType" ? (
+                  <select
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Select User Type</option>
+                    <option value="RN">RN</option>
+                    <option value="LPN">LPN</option>
+                    <option value="Chief">Chief</option>
+                  </select>
+                ) : key === "dateOfBirth" ? (
+                  <input
+                    type="date"
+                    name={key}
+                    value={
+                      formData[key]
+                        ? formData[key].toISOString().split("T")[0]
+                        : ""
+                    }
+                    onChange={(e) => handleDateChange(new Date(e.target.value))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                ) : key === "password" ? (
+                  <input
+                    type="password"
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleInputChange}
+                    placeholder={`Enter your ${key}`}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleInputChange}
+                    placeholder={`Enter your ${key}`}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Medical ID
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your medical ID"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Gender
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your gender"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Address
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your address"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                User Type
-              </label>
-              <input
-                type="text"
-                placeholder="Enter user type"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Contract Details
-              </label>
-              <input
-                type="text"
-                placeholder="Enter contract details"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Department
-              </label>
-              <input
-                type="text"
-                placeholder="Enter department"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
+          <div className="absolute bottom-4 right-4">
+            <button
+              type="submit"
+              className="px-6 py-2 bg-purple-600 text-white text-sm font-semibold rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              Done
+            </button>
           </div>
         </form>
-
-        <div className="absolute bottom-4 right-4">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-purple-600 text-white text-sm font-semibold rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          >
-            Done
-          </button>
-        </div>
       </div>
     </div>
   );

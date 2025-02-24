@@ -258,7 +258,7 @@ const AccountSettings = () => {
             Delete Account
           </button>
         </div>
-        {/* Modal de confirmação de exclusão */}
+
         {deleteConfirmation &&
           createPortal(
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

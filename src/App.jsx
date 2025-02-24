@@ -46,13 +46,11 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route // Adicione a rota para AccountSettings
-          path="/settings" // Defina o caminho para a página de configurações
+        <Route
+          path="/settings"
           element={
             <PrivateRoute>
-              {" "}
-              {/* Proteja a rota com PrivateRoute */}
-              <AccountSettings /> {/* Renderize o componente AccountSettings */}
+              <AccountSettings />
             </PrivateRoute>
           }
         />
